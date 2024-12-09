@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Triage App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <h1>Hospital Triage App</h1>
+        <p class="description">Streamline emergency room management with efficient queue handling.</p>
+        <label for="role-selector">Choose your role:</label>
+        <select id="role-selector" class="role-selector">
+            <option value="">Select Role</option>
+            <option value="admin">Administrator</option>
+            <option value="patient">Patient</option>
+        </select>
+    </header>
+
+    <main class="main-content">
+        <!-- Admin Login Section -->
+        <section id="admin-login" class="section hidden">
+            <h2>Administrator Login</h2>
+            <p>Access the triage dashboard to manage patient queues and prioritize treatments.</p>
+            <form id="admin-login-form" class="form">
+                <label for="admin-username">Username:</label>
+                <input type="text" id="admin-username" class="input-field" placeholder="Enter username" required>
+                
+                <label for="admin-password">Password:</label>
+                <input type="password" id="admin-password" class="input-field" placeholder="Enter password" required>
+                
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </section>
+
+        <!-- Admin Dashboard Section -->
+        <section id="admin-view" class="section hidden">
+            <h2>Admin Dashboard</h2>
+            <p>Manage the queue of patients below. Update attention levels or mark patients as treated.</p>
+            <button id="refresh-queue" class="btn">Refresh Queue</button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Injury Type</th>
+                        <th>Pain Level</th>
+                        <th>Wait Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="patient-table">
+                    <!-- Rows dynamically populated -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Patient Submission Section -->
+        <section id="patient-view" class="section hidden">
+            <h2>Patient Submission</h2>
+            <p>Provide your details to determine your estimated wait time in the emergency queue.</p>
+            <form id="patient-form" class="form">
+                <label for="injury">Injury Type:</label>
+                <select id="injury" class="input-field" required>
+                    <option value="">Select Injury</option>
+                    <option value="Head">Head</option>
+                    <option value="Heart">Heart</option>
+                    <option value="Lung">Lung</option>
+                    <option value="Neck">Neck</option>
+                    <option value="Stomach">Stomach</option>
+                    <option value="Bone/Muscle">Bone or Muscle</option>
+                    <option value="Burn/Cut">Burn or Cut</option>
+                </select>
+
+                <label for="pain-level">Pain Level (1-10):</label>
+                <input type="number" id="pain-level" class="input-field" min="1" max="10" placeholder="Enter pain level" required>
+                
+                <button type="submit" class="btn">Submit</button>
+            </form>
+            <p id="wait-time" class="info-message"></p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Hospital Triage App | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

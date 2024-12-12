@@ -1,91 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospital Triage App</title>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Hospital Triage System</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body> 
+<body>
     <header class="header">
-        <h1>Hospital Triage App</h1>
-        <p class="description">Streamline emergency room management with efficient queue handling.</p>
-        <label for="role-selector">Choose your role:</label>
-        <select id="role-selector" class="role-selector">
-            <option value="">Select Role</option>
-            <option value="admin">Administrator</option>
-            <option value="patient">Patient</option>
-        </select>
+        <h1 class="header-title">Hospital Triage System</h1>
+        <p class="header-subtitle">Streamlining patient care and priority management</p>
     </header>
 
     <main class="main-content">
-        <!-- Admin Login Section -->
-        <section id="admin-login" class="section hidden">
-            <h2>Administrator Login</h2>
-            <p>Access the triage dashboard to manage patient queues and prioritize treatments.</p>
-            <form id="admin-login-form" class="form">
-                <label for="admin-username">Username:</label>
-                <input type="text" id="admin-username" class="input-field" placeholder="Enter username" required>
-                
-                <label for="admin-password">Password:</label>
-                <input type="password" id="admin-password" class="input-field" placeholder="Enter password" required>
-                
-                <button type="submit" class="btn">Login</button>
+
+        <!-- Login Section -->
+        <section id="login-section" class="section">
+            <h2>Login</h2>
+            <form id="login-form" class="form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="code">Code</label>
+                    <input type="password" id="code" placeholder="Enter your code" required>
+                </div>
+                <button type="submit" id="login-btn" class="button">Login</button>
             </form>
+            <p id="login-message" class="message"></p>
         </section>
 
-        <!-- Admin Dashboard Section -->
-        <section id="admin-view" class="section hidden">
+        <!-- Admin Dashboard -->
+        <section id="admin-dashboard" class="section hidden">
             <h2>Admin Dashboard</h2>
-            <p>Manage the queue of patients below. Update attention levels or mark patients as treated.</p>
-            <button id="refresh-queue" class="btn">Refresh Queue</button>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Injury Type</th>
-                        <th>Pain Level</th>
-                        <th>Wait Time</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="patient-table">
-                    <!-- Rows dynamically populated -->
-                </tbody>
-            </table>
+            <div class="actions">
+                <button id="view-patients-btn" class="button button-secondary">View All Patients</button>
+                <button id="add-patient-btn" class="button button-success">Add New Patient</button>
+            </div>
+
+            <!-- Patients Table Container -->
+            <div id="patients-list" class="section hidden"></div>
+
+            <!-- Add New Patient Form -->
+            <div id="add-patient-form" class="form-container hidden">
+                <h3>Add New Patient</h3>
+                <form class="form">
+                    <div class="form-group">
+                        <label for="patient-name">Name</label>
+                        <input type="text" id="patient-name" placeholder="Patient Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patient-gender">Gender</label>
+                        <input type="text" id="patient-gender" placeholder="Gender" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patient-dob">Date of Birth</label>
+                        <input type="date" id="patient-dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patient-contact">Contact</label>
+                        <input type="text" id="patient-contact" placeholder="Contact" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patient-priority">Priority ID</label>
+                        <input type="number" id="patient-priority" placeholder="Priority ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patient-issue">Medical Issue</label>
+                        <input type="text" id="patient-issue" placeholder="Medical Issue" required>
+                    </div>
+                    <button type="button" id="submit-patient-btn" class="button">Submit</button>
+                </form>
+            </div>
         </section>
 
-        <!-- Patient Submission Section -->
-        <section id="patient-view" class="section hidden">
-            <h2>Patient Submission</h2>
-            <p>Provide your details to determine your estimated wait time in the emergency queue.</p>
-            <form id="patient-form" class="form">
-                <label for="injury">Injury Type:</label>
-                <select id="injury" class="input-field" required>
-                    <option value="">Select Injury</option>
-                    <option value="Head">Head</option>
-                    <option value="Heart">Heart</option>
-                    <option value="Lung">Lung</option>
-                    <option value="Neck">Neck</option>
-                    <option value="Stomach">Stomach</option>
-                    <option value="Bone/Muscle">Bone or Muscle</option>
-                    <option value="Burn/Cut">Burn or Cut</option>
-                </select>
-
-                <label for="pain-level">Pain Level (1-10):</label>
-                <input type="number" id="pain-level" class="input-field" min="1" max="10" placeholder="Enter pain level" required>
-                
-                <button type="submit" class="btn">Submit</button>
-            </form>
-            <p id="wait-time" class="info-message"></p>
+        <!-- User Dashboard -->
+        <section id="user-dashboard" class="section hidden">
+            <h2>User Dashboard</h2>
+            <button id="view-wait-time-btn" class="button button-secondary">View Wait Time</button>
+            <div id="wait-time"></div>
         </section>
+
     </main>
 
-    <footer class="footer">
-        <p>&copy; 2024 Hospital Triage App | All Rights Reserved</p>
-    </footer>
-
+    <!-- Include the script file -->
     <script src="script.js"></script>
 </body>
 </html>
